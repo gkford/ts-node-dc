@@ -10,6 +10,11 @@ if ! grep -qx "*.aider" .gitignore; then
     echo "*.aider" >> .gitignore
 fi
 
+# Add node_modules to .gitignore if not already present
+if ! grep -qx "node_modules" .gitignore; then
+    echo "node_modules" >> .gitignore
+fi
+
 # Install aider-chat using pip
 pip install aider-chat
 
