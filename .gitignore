@@ -6,3 +6,5 @@ node_modules
 !.env.local.template
 !.env.template
 .aider*
+!.aider.conf.yml
+!.aiderignore
