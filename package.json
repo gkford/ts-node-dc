@@ -1,27 +1,17 @@
 {
-  "name": "ts-vercel-api",
+  "name": "walkit",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "api"
+  ],
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-oauth2-jwt-bearer": "^1.6.0",
-    "helmet": "^7.1.0",
-    "nocache": "^4.0.0"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.14.10",
-    "prettier": "^3.3.2",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.5.3"
+    "build:api": "yarn workspace api build",
+    "start:api": "yarn workspace api start",
+    "dev:api": "yarn workspace api dev",
+    "build:frontend": "yarn workspace frontend build",
+    "start:frontend": "yarn workspace frontend start",
+    "dev:frontend": "yarn workspace frontend dev"
   }
 }

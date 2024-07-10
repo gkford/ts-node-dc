@@ -31,3 +31,54 @@
 
 # 2024-07-09 18:56:58.463512
 +/exit
+
+# 2024-07-09 19:51:21.952653
++/add src/messages/message.model.ts src/messages/messages.router.ts src/messages/messages.service.ts src/index.ts 
+
+# 2024-07-09 19:51:57.900343
++I'm building an express api with typescript. I want you to generate an openAPI spec for me. don't write code to gneerate it - do it yourself. Let me know if you need any more files
+
+# 2024-07-09 19:55:06.364124
++here is the public server address: https://vigilant-space-guide-wx5xwpppr6f577-4040.app.github.dev/
+
+# 2024-07-09 21:52:11.772245
++/add src/index.ts
+
+# 2024-07-09 21:52:22.924442
++/run tsc
+
+# 2024-07-09 21:52:31.004385
++/run yarn dev
+
+# 2024-07-09 21:53:47.322832
++/add src/index.ts
+
+# 2024-07-09 21:53:56.004830
++@gkford ➜ /workspaces/ts-node-dc (main) $ yarn dev
++yarn run v1.22.22
++warning package.json: No license field
++$ ts-node src/index.ts
++/workspaces/ts-node-dc/node_modules/express-oauth2-jwt-bearer/dist/index.js:266
++    assert.strict(audience, "An 'audience' is required to validate the 'aud' claim");
++           ^
++AssertionError [ERR_ASSERTION]: An 'audience' is required to validate the 'aud' claim
++    at jwtVerifier (/workspaces/ts-node-dc/node_modules/express-oauth2-jwt-bearer/dist/index.js:266:12)
++    at auth (/workspaces/ts-node-dc/node_modules/express-oauth2-jwt-bearer/dist/index.js:399:23)
++    at Object.<anonymous> (/workspaces/ts-node-dc/src/middleware/auth0.middleware.ts:6:40)
++    at Module._compile (node:internal/modules/cjs/loader:1358:14)
++    at Module.m._compile (/workspaces/ts-node-dc/node_modules/ts-node/src/index.ts:1618:23)
++    at Module._extensions..js (node:internal/modules/cjs/loader:1416:10)
++    at Object.require.extensions.<computed> [as .ts] (/workspaces/ts-node-dc/node_modules/ts-node/src/index.ts:1621:12)
++    at Module.load (node:internal/modules/cjs/loader:1208:32)
++    at Function.Module._load (node:internal/modules/cjs/loader:1024:12)
++    at Module.require (node:internal/modules/cjs/loader:1233:19) {
++  generatedMessage: false,
++  code: 'ERR_ASSERTION',
++  actual: undefined,
++  expected: true,
++  operator: '=='
++}
++error Command failed with exit code 1.
+
+# 2024-07-09 21:54:43.890004
++/undo
