@@ -1,6 +1,6 @@
 import React from "react";
-import { NavBarTabs } from "./navigation/desktop/nav-bar-tabs";
-import { MobileNavBarTabs } from "./navigation/mobile/mobile-nav-bar-tabs";
+import { NavBar } from "./navigation/desktop/nav-bar";
+// import { MobileNavBar } from "./navigation/mobile/mobile-nav-bar";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -9,8 +9,8 @@ interface PageLayoutProps {
 export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
     <div className="page-layout">
-      <NavBarTabs />
-      <MobileNavBarTabs />
+      <NavBar />
+      {/* <MobileNavBar /> */}
       <div>{children}</div>
     </div>
   );
