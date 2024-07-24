@@ -11,16 +11,27 @@ export const getPublicResource = async () => {
     headers: {
       "content-type": "application/json",
     },
+    timeout: 5000, // 5 seconds timeout
   };
   console.log('API request config:', config);
 
-  const { data, error } = await callExternalApi<any>({ config });
-  console.log('API response:', { data, error });
-
-  return {
-    data: data || null,
-    error,
-  };
+  try {
+    const { data, error } = await callExternalApi<any>({ config });
+    console.log('API response:', { data, error });
+    return {
+      data: data || null,
+      error,
+    };
+  } catch (error) {
+    console.error('Error in getPublicResource:', error);
+    return {
+      data: null,
+      error: {
+        message: 'Failed to fetch public resource',
+        details: error,
+      },
+    };
+  }
 };
 
 export const getProtectedResource = async (accessToken: string) => {

@@ -37,7 +37,9 @@ export const callExternalApi = async <T>(options: ApiOptions): Promise<ApiRespon
         response: axiosError.response?.data,
       });
 
-      if (axiosError.response) {
+      if (axiosError.code === 'ECONNABORTED') {
+        message = "Request timed out";
+      } else if (axiosError.response) {
         const responseData = axiosError.response.data;
 
         // Check if the response data conforms to ApiErrorResponse
