@@ -4,12 +4,13 @@ import express from "express";
 import helmet from "helmet";
 import nocache from "nocache";
 import { messagesRouter } from "./messages/messages.router";
+import { oauthRouter } from "./oauth/oauth.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
 
 dotenv.config();
 
-if (!(process.env.PORT && process.env.CLIENT_ORIGIN_URL)) {
+if (!(process.env.PORT && process.env.CLIENT_ORIGIN_URL && process.env.AUTH0_DOMAIN)) {
   throw new Error(
     "Missing required environment variables. Check docs for more info."
   );
@@ -59,6 +60,7 @@ app.use(
 
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
+apiRouter.use("/oauth", oauthRouter);
 
 app.use(errorHandler);
 app.use(notFoundHandler);
