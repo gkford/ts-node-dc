@@ -15,20 +15,27 @@ interface ApiErrorResponse {
 }
 
 export const callExternalApi = async <T>(options: ApiOptions): Promise<ApiResponse<T>> => {
+  console.log('Calling external API with options:', options);
   try {
     const response: AxiosResponse<T> = await axios(options.config);
     const { data } = response;
-
+    console.log('API call successful. Response:', data);
     return {
       data,
       error: null,
     };
   } catch (error: unknown) {
+    console.error('API call failed. Error:', error);
     let message = "HTTP request failed";
     let details: unknown = null;
 
     if (axios.isAxiosError(error)) {
       const axiosError: AxiosError = error;
+      console.error('Axios error details:', {
+        message: axiosError.message,
+        code: axiosError.code,
+        response: axiosError.response?.data,
+      });
 
       if (axiosError.response) {
         const responseData = axiosError.response.data;

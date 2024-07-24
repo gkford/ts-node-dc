@@ -1,9 +1,10 @@
 import { callExternalApi } from "./external-api.service";
 
-const apiServerUrl = import.meta.env.VITE_API_SERVER_URL || 'http://localhost:3000';
+const apiServerUrl = import.meta.env.VITE_API_SERVER_URL;
 console.log('API Server URL:', apiServerUrl);
 
 export const getPublicResource = async () => {
+  console.log('Calling getPublicResource');
   const config = {
     url: `${apiServerUrl}/api/messages/public`,
     method: "GET",
@@ -11,8 +12,10 @@ export const getPublicResource = async () => {
       "content-type": "application/json",
     },
   };
+  console.log('API request config:', config);
 
   const { data, error } = await callExternalApi<any>({ config });
+  console.log('API response:', { data, error });
 
   return {
     data: data || null,
