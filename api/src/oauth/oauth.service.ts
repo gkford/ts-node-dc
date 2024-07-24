@@ -19,16 +19,21 @@ export const tokenProxy = async (req: Request, res: Response) => {
   req.on('end', async () => {
     try {
       console.log('tokenProxy - Raw request body:', rawBody);
-      console.log('tokenProxy - Parsed request body:', req.body);
+      
+      // Parse the raw body
+      const parsedBody = new URLSearchParams(rawBody);
+      const bodyObject = Object.fromEntries(parsedBody);
+      
+      console.log('tokenProxy - Parsed request body:', bodyObject);
       console.log('tokenProxy - Incoming request headers:', req.headers);
 
-      if (!rawBody && Object.keys(req.body).length === 0) {
+      if (!rawBody) {
         console.error('tokenProxy - Request body is empty');
         return res.status(400).json({ message: "Request body is empty" });
       }
 
       const requiredFields = ['grant_type', 'client_id', 'client_secret', 'code', 'redirect_uri'];
-      const missingFields = requiredFields.filter(field => !(field in req.body));
+      const missingFields = requiredFields.filter(field => !(field in bodyObject));
 
       if (missingFields.length > 0) {
         console.error(`tokenProxy - Missing required fields: ${missingFields.join(', ')}`);
@@ -37,7 +42,7 @@ export const tokenProxy = async (req: Request, res: Response) => {
 
       const auth0Response = await axios.post(
         `https://${AUTH0_DOMAIN}/oauth/token`,
-        new URLSearchParams(req.body),
+        rawBody,
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
