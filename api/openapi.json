@@ -26,11 +26,6 @@
       "get": {
         "summary": "Get protected message",
         "operationId": "getProtectedMessage",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -39,9 +34,6 @@
                 "schema": {}
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
