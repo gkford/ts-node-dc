@@ -3,22 +3,44 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Route, Routes } from 'react-router-dom';
 import { AuthenticationGuard } from './components/authentication-guard';
 import { PageLoader } from './components/page-loader';
-import { LoginButton } from './components/buttons/login-button';
-import { SignupButton } from './components/buttons/signup-button';
-import { LogoutButton } from './components/buttons/logout-button';
 import { ProfilePage } from './pages/profile-page';
+import { PageLayout } from './components/page-layout';
 import './App.css';
 
 // Placeholder components for the routes
-const HomePage: React.FC = () => <h1>Home Page</h1>;
-const PublicPage: React.FC = () => <h1>Public Page</h1>;
-const ProtectedPage: React.FC = () => <h1>Protected Page</h1>;
-const AdminPage: React.FC = () => <h1>Admin Page</h1>;
-const CallbackPage: React.FC = () => <h1>Callback Page</h1>;
-const NotFoundPage: React.FC = () => <h1>404: Not Found</h1>;
+const HomePage: React.FC = () => (
+  <PageLayout>
+    <h1>Home Page</h1>
+  </PageLayout>
+);
+const PublicPage: React.FC = () => (
+  <PageLayout>
+    <h1>Public Page</h1>
+  </PageLayout>
+);
+const ProtectedPage: React.FC = () => (
+  <PageLayout>
+    <h1>Protected Page</h1>
+  </PageLayout>
+);
+const AdminPage: React.FC = () => (
+  <PageLayout>
+    <h1>Admin Page</h1>
+  </PageLayout>
+);
+const CallbackPage: React.FC = () => (
+  <PageLayout>
+    <h1>Callback Page</h1>
+  </PageLayout>
+);
+const NotFoundPage: React.FC = () => (
+  <PageLayout>
+    <h1>404: Not Found</h1>
+  </PageLayout>
+);
 
 const App: React.FC = () => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isLoading } = useAuth0();
 
   if (isLoading) {
     return (
@@ -30,17 +52,6 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>My React App</h1>
-        {isAuthenticated ? (
-          <LogoutButton />
-        ) : (
-          <>
-            <LoginButton />
-            <SignupButton />
-          </>
-        )}
-      </header>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
