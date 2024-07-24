@@ -26,6 +26,11 @@
       "get": {
         "summary": "Get protected message",
         "operationId": "getProtectedMessage",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -34,12 +39,23 @@
                 "schema": {}
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     }
   },
-  "components": {},
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
   "servers": [
     {
       "url": "https://vigilant-space-guide-wx5xwpppr6f577-6060.app.github.dev"
