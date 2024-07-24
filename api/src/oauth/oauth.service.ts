@@ -10,6 +10,7 @@ export const authProxy = (req: Request, res: Response) => {
 
 export const tokenProxy = async (req: Request, res: Response) => {
   try {
+    console.log('Sending request to Auth0 with body:', req.body);
     const auth0Response = await axios.post(
       `https://${AUTH0_DOMAIN}/oauth/token`,
       req.body,
@@ -19,6 +20,8 @@ export const tokenProxy = async (req: Request, res: Response) => {
         }
       }
     );
+    console.log('Auth0 response headers:', auth0Response.headers);
+    console.log('Auth0 response data:', auth0Response.data);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(auth0Response.data));
   } catch (error) {
