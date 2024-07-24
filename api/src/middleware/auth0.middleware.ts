@@ -14,6 +14,13 @@ export const validateAccessToken = (req: Request, res: Response, next: NextFunct
   console.log('validateAccessToken - Auth0 Domain:', process.env.AUTH0_DOMAIN);
   console.log('validateAccessToken - Auth0 Audience:', process.env.AUTH0_AUDIENCE);
 
+  // Extract and decode the token
+  const token = req.headers.authorization?.split(' ')[1];
+  if (token) {
+    const decodedToken = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    console.log('validateAccessToken - Token aud claim:', decodedToken.aud);
+  }
+
   authMiddleware(req, res, (err: any) => {
     if (err) {
       console.error('validateAccessToken - Token validation failed:', err);
