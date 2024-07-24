@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
+import { PageLayout } from "../components/page-layout";
 
 export const ProfilePage: React.FC = () => {
   const { user } = useAuth0();
@@ -9,7 +10,8 @@ export const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div className="content-layout">
+    <PageLayout>
+      <div className="content-layout">
       <h1 id="page-title" className="content__title">
         Profile Page
       </h1>
@@ -42,6 +44,7 @@ export const ProfilePage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </PageLayout>
   );
 };
