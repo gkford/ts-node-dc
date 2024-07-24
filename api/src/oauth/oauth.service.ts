@@ -14,10 +14,23 @@ export const tokenProxy = async (req: Request, res: Response) => {
   try {
     console.log('tokenProxy - Incoming request body:', req.body);
     console.log('tokenProxy - Incoming request headers:', req.headers);
-    
+
+    if (Object.keys(req.body).length === 0) {
+      console.error('tokenProxy - Request body is empty');
+      return res.status(400).json({ message: "Request body is empty" });
+    }
+
+    const requiredFields = ['grant_type', 'client_id', 'client_secret', 'code', 'redirect_uri'];
+    const missingFields = requiredFields.filter(field => !(field in req.body));
+
+    if (missingFields.length > 0) {
+      console.error(`tokenProxy - Missing required fields: ${missingFields.join(', ')}`);
+      return res.status(400).json({ message: `Missing required fields: ${missingFields.join(', ')}` });
+    }
+
     const auth0Response = await axios.post(
       `https://${AUTH0_DOMAIN}/oauth/token`,
-      req.body,
+      new URLSearchParams(req.body),
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -38,7 +51,7 @@ export const tokenProxy = async (req: Request, res: Response) => {
         `tokenProxy - Failed to fetch token from Auth0, status code: ${error.response?.status}, ` +
         `request data: ${JSON.stringify(req.body)}, error: ${error.response?.data}`
       );
-      res.status(500).json({
+      res.status(error.response?.status || 500).json({
         message: "Failed to exchange token with Auth0.",
         error_details: error.response?.data,
         form_data: req.body
