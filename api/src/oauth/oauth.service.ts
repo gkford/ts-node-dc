@@ -19,7 +19,8 @@ export const tokenProxy = async (req: Request, res: Response) => {
         }
       }
     );
-    res.json(auth0Response.data);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(auth0Response.data));
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
