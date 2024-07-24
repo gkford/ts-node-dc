@@ -10,6 +10,9 @@ export const messagesRouter = express.Router();
 
 messagesRouter.get("/public", (req, res) => {
   console.log('Public message endpoint called');
+  console.log('Request headers:', req.headers);
+  console.log('Authorization header:', req.headers.authorization);
+  
   const message = getPublicMessage();
 
   console.log('Sending public message:', message);
