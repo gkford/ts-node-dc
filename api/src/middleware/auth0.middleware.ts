@@ -17,8 +17,21 @@ export const validateAccessToken = (req: Request, res: Response, next: NextFunct
   // Extract and decode the token
   const token = req.headers.authorization?.split(' ')[1];
   if (token) {
-    const decodedToken = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-    console.log('validateAccessToken - Token aud claim:', decodedToken.aud);
+    try {
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        console.error('validateAccessToken - Invalid token format');
+        return res.status(401).json({ message: 'Invalid token format' });
+      }
+      const decodedToken = JSON.parse(Buffer.from(parts[1], 'base64').toString());
+      console.log('validateAccessToken - Decoded token:', decodedToken);
+    } catch (error) {
+      console.error('validateAccessToken - Error decoding token:', error);
+      return res.status(401).json({ message: 'Error decoding token' });
+    }
+  } else {
+    console.error('validateAccessToken - No token provided');
+    return res.status(401).json({ message: 'No token provided' });
   }
 
   authMiddleware(req, res, (err: any) => {
