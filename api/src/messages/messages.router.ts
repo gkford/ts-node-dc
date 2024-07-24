@@ -20,8 +20,13 @@ messagesRouter.get("/public", (req, res) => {
 });
 
 messagesRouter.get("/protected", validateAccessToken, (req, res) => {
+  console.log('Protected message endpoint called');
+  console.log('Request headers:', req.headers);
+  console.log('Authorization header:', req.headers.authorization);
+  
   const message = getProtectedMessage();
 
+  console.log('Sending protected message:', message);
   res.status(200).json(message);
 });
 
