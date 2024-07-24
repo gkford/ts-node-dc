@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthenticationGuard } from './components/authentication-guard';
 import { PageLoader } from './components/page-loader';
 import { ProfilePage } from './pages/profile-page';
+import { PublicPage } from './pages/public-page';
+import { ProtectedPage } from './pages/protected-page';
 import { PageLayout } from './components/page-layout';
 import './App.css';
 
@@ -13,12 +15,6 @@ const HomePage: React.FC = () => (
     <h1>Home Page</h1>
   </PageLayout>
 );
-const PublicPage: React.FC = () => (
-  <PageLayout>
-    <h1>Public Page</h1>
-  </PageLayout>
-);
-import { ProtectedPage } from './pages/protected-page';
 const AdminPage: React.FC = () => (
   <PageLayout>
     <h1>Admin Page</h1>
