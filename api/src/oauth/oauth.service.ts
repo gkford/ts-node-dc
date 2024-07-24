@@ -12,13 +12,19 @@ export const authProxy = (req: Request, res: Response) => {
 
 export const tokenProxy = async (req: Request, res: Response) => {
   try {
-    console.log('tokenProxy - Incoming request body:', req.body);
-    console.log('tokenProxy - Incoming request headers:', req.headers);
+    let rawBody = '';
+    req.on('data', chunk => {
+      rawBody += chunk.toString();
+    });
+    req.on('end', async () => {
+      console.log('tokenProxy - Raw request body:', rawBody);
+      console.log('tokenProxy - Parsed request body:', req.body);
+      console.log('tokenProxy - Incoming request headers:', req.headers);
 
-    if (Object.keys(req.body).length === 0) {
-      console.error('tokenProxy - Request body is empty');
-      return res.status(400).json({ message: "Request body is empty" });
-    }
+      if (!rawBody && Object.keys(req.body).length === 0) {
+        console.error('tokenProxy - Request body is empty');
+        return res.status(400).json({ message: "Request body is empty" });
+      }
 
     const requiredFields = ['grant_type', 'client_id', 'client_secret', 'code', 'redirect_uri'];
     const missingFields = requiredFields.filter(field => !(field in req.body));
