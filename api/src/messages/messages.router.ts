@@ -33,6 +33,11 @@ messagesRouter.get("/protected", (req, res, next) => {
   res.status(200).json(message);
 });
 
+messagesRouter.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error('Error in messagesRouter:', err);
+  res.status(500).json({ message: 'An error occurred', error: err.message });
+});
+
 messagesRouter.get("/admin", validateAccessToken, (req, res) => {
   const message = getAdminMessage();
 
