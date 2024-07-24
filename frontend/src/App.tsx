@@ -18,11 +18,7 @@ const PublicPage: React.FC = () => (
     <h1>Public Page</h1>
   </PageLayout>
 );
-const ProtectedPage: React.FC = () => (
-  <PageLayout>
-    <h1>Protected Page</h1>
-  </PageLayout>
-);
+import { ProtectedPage } from './pages/protected-page';
 const AdminPage: React.FC = () => (
   <PageLayout>
     <h1>Admin Page</h1>
