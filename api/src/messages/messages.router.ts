@@ -9,8 +9,10 @@ import {
 export const messagesRouter = express.Router();
 
 messagesRouter.get("/public", (req, res) => {
+  console.log('Public message endpoint called');
   const message = getPublicMessage();
 
+  console.log('Sending public message:', message);
   res.status(200).json(message);
 });
 
