@@ -39,15 +39,7 @@
       }
     }
   },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    }
-  },
+  "components": {},
   "servers": [
     {
       "url": "https://vigilant-space-guide-wx5xwpppr6f577-6060.app.github.dev"
