@@ -8,36 +8,3 @@ export const validateAccessToken = auth({
   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
   audience: process.env.AUTH0_AUDIENCE,
 });
-
-// const authMiddleware = auth({
-//   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
-//   audience: process.env.AUTH0_AUDIENCE,
-// });
-
-// export const validateAccessToken = (req: Request, res: Response, next: NextFunction) => {
-//   console.log('validateAccessToken - Starting token validation');
-//   console.log('validateAccessToken - Auth0 Domain:', process.env.AUTH0_DOMAIN);
-//   console.log('validateAccessToken - Auth0 Audience:', process.env.AUTH0_AUDIENCE);
-
-//   // Extract the token
-//   const token = req.headers.authorization?.split(' ')[1];
-//   if (!token) {
-//     console.error('validateAccessToken - No token provided');
-//     return res.status(401).json({ message: 'No token provided' });
-//   }
-
-//   console.log('validateAccessToken - Token received:', token);
-
-//   // For encrypted tokens, we can't decode them here. We'll pass them to Auth0 for validation.
-//   authMiddleware(req, res, (err: any) => {
-//     if (err) {
-//       console.error('validateAccessToken - Token validation failed:', err);
-//       if (err instanceof UnauthorizedError) {
-//         console.error('validateAccessToken - Unauthorized error details:', err.headers, err.message);
-//       }
-//       return res.status(401).json({ message: 'Invalid token' });
-//     }
-//     console.log('validateAccessToken - Token validation successful');
-//     next();
-//   });
-// };
