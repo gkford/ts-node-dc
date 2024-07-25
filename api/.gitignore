@@ -6,6 +6,3 @@
 # Dependencies
 node_modules
 dist
-
-# Other
-*.aider
