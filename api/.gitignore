@@ -1,7 +1,10 @@
-*.aider
-*.env.local
-.env.local
-node_modules/
-node_modules
-!.env.local.template
+# Environment files
+.env*
 !.env.template
+!.env.local.template
+
+# Dependencies
+node_modules
+
+# Other
+*.aider
