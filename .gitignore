@@ -9,4 +9,5 @@ node_modules
 # Aider files
 .aider*
 !.aider.conf.yml
-!.aiderignore
+!.aiderignore*.aider
+.env.local
