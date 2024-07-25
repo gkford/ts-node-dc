@@ -1,3 +1,4 @@
+
 Important seeming stuff from the tutorial:
 
 However, if you were to deploy your React application to production, you need to add the production logout URL to the "Allowed Logout URLs" list and ensure that Auth0 redirects your users to that production URL and not localhost. Setting logoutParams.returnTo to window.location.origin will do just that.
