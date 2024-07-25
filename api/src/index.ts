@@ -10,7 +10,10 @@ import { notFoundHandler } from "./middleware/not-found.middleware";
 
 dotenv.config();
 
-if (!(process.env.PORT && process.env.CLIENT_ORIGIN_URL && process.env.AUTH0_DOMAIN)) {
+if (!(
+  process.env.PORT &&
+  // process.env.CLIENT_ORIGIN_URL &&
+  process.env.AUTH0_DOMAIN)) {
   throw new Error(
     "Missing required environment variables. Check docs for more info."
   );
@@ -49,14 +52,14 @@ app.use((req, res, next) => {
 });
 app.use(nocache());
 
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN_URL,
-    methods: ["GET"],
-    allowedHeaders: ["Authorization", "Content-Type"],
-    maxAge: 86400,
-  })
-);
+// app.use(
+//   cors({
+//     origin: CLIENT_ORIGIN_URL,
+//     methods: ["GET"],
+//     allowedHeaders: ["Authorization", "Content-Type"],
+//     maxAge: 86400,
+//   })
+// );
 
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
