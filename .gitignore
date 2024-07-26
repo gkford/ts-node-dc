@@ -1,7 +1,5 @@
 # Environment files
-.env*
-!.env.template
-!.env.local.template
+.env.local
 
 # Dependencies
 node_modules
@@ -10,4 +8,4 @@ node_modules
 .aider*
 !.aider.conf.yml
 !.aiderignore*.aider
-.env.local
+
