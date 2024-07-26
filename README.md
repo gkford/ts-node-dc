@@ -110,7 +110,7 @@ https://vigilant-space-guide-wx5xwpppr6f577-6060.app.github.dev/api/oauth/token
 - Changing either the authorisation settings or the openapi.json can result in the callback url changing. Until you update that in the auth0 dash, your GPT will be broken. This can result in a lot of frustrataion and a very annoying dev loop. Remember to save the auth0 dashboard settings after pasting in an updated callback url! 
 - Sometimes updating openapi.json will cause some sort of issue where you need to re-enter your client ID and client secret and resave the authorisation information. This might, or might not, again trigger a new callback URL. I don't know why these issues happen but they are very annoying and because there are no error messages, hard to diagnose. Generally if attempting to login leads you to an "undefined" url, this means your callback doesn't match, or possibly that you need to re-enter and save your auth details in the GPT UI. However, sometime you will also get an auth0 page telling you that is the issue as well. SO it is very hard to say what is going on.
 
-
+12. At this point you should also be able to sign into and access your protected API via your GPT. Congratulations.
 
 ## What to do with the callback
 
@@ -120,40 +120,14 @@ https://vigilant-space-guide-wx5xwpppr6f577-6060.app.github.dev/api/oauth/token
 
 - No way of generating this at the moment - recommend using LLM to generate it, though apparently tools exist
 
+---
 
-----
-## from frontend readme (deleted, needs to be repackaged):
-
-# Single Page React Frontend with Auth0
-
-
-Example env:
-
-VITE_API_SERVER_URL=https://vigilant-space-guide-wx5xwpppr6f577-6060.app.github.dev
-VITE_AUTH0_DOMAIN=dev-s1yj8dwdfv6otxhv.us.auth0.com
-VITE_AUTH0_CLIENT_ID=FpHcS4CxLfgST5zdnY3CNFuT6ugniEpI
-VITE_AUTH0_CALLBACK_URL=https://vigilant-space-guide-wx5xwpppr6f577-4040.app.github.dev/callback
-VITE_AUTH0_AUDIENCE=https://hello-world.example.com
-
-## NOTES: Important seeming stuff from the tutorial:
-
-However, if you were to deploy your React application to production, you need to add the production logout URL to the "Allowed Logout URLs" list and ensure that Auth0 redirects your users to that production URL and not localhost. Setting logoutParams.returnTo to window.location.origin will do just that.
+## NOTES: This is from the tutorial and seems important but hasn't been followed:
 
 A best practice when working with Auth0 is to have different tenants for your different project environments. For example, it's recommended for developers to specify a production tenant. A production tenant gets higher rate limits than non-production tenants. Check out the "Set Up Multiple Environments" Auth0 document to learn more about how to set up development, staging, and production environments in the Auth0 Identity Platform.
 
 ----
-## from apinotes, now deleted, repackage:
 
 Ridiculous issue that took me a billion years to fix:
 
 If the audience isn't specified when the authorize endpoint is called, auth0 issues a weird JWE/opaque token instead of simply failing. This causes bizzare problems. To fix this, you need to specify the audience within the custom auth and token endpoints in your api. The audience is appended at the end of the auth request in oauth.service.ts
-
-
-Of course, the address given there will be different depending on the name of the codespaces instance or the server otherwise in use
-
-api env example:
-
-PORT=6060
-CLIENT_ORIGIN_URL=https://vigilant-space-guide-wx5xwpppr6f577-4040.app.github.dev
-AUTH0_DOMAIN=dev-s1yj8dwdfv6otxhv.us.auth0.com
-AUTH0_AUDIENCE=https://hello-world.example.com
