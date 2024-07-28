@@ -1,5 +1,7 @@
-import cors from "cors";
 import * as dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import nocache from "nocache";
@@ -7,8 +9,6 @@ import { messagesRouter } from "./messages/messages.router";
 import { oauthRouter } from "./oauth/oauth.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
-
-dotenv.config();
 
 if (!(
   process.env.PORT &&
@@ -68,6 +68,8 @@ apiRouter.use("/oauth", oauthRouter);
 app.use(errorHandler);
 app.use(notFoundHandler);
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Listening on port ${PORT}`);
+// });
+
+export default app

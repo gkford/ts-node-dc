@@ -27,6 +27,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
+dotenv.config();
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const nocache_1 = __importDefault(require("nocache"));
@@ -34,9 +36,8 @@ const messages_router_1 = require("./messages/messages.router");
 const oauth_router_1 = require("./oauth/oauth.router");
 const error_middleware_1 = require("./middleware/error.middleware");
 const not_found_middleware_1 = require("./middleware/not-found.middleware");
-dotenv.config();
 if (!(process.env.PORT &&
-    // process.env.CLIENT_ORIGIN_URL &&
+    process.env.CLIENT_ORIGIN_URL &&
     process.env.AUTH0_DOMAIN)) {
     throw new Error("Missing required environment variables. Check docs for more info.");
 }
@@ -66,19 +67,18 @@ app.use((req, res, next) => {
     next();
 });
 app.use((0, nocache_1.default)());
-// app.use(
-//   cors({
-//     origin: CLIENT_ORIGIN_URL,
-//     methods: ["GET"],
-//     allowedHeaders: ["Authorization", "Content-Type"],
-//     maxAge: 86400,
-//   })
-// );
+app.use((0, cors_1.default)({
+    origin: CLIENT_ORIGIN_URL,
+    methods: ["GET"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+    maxAge: 86400,
+}));
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messages_router_1.messagesRouter);
 apiRouter.use("/oauth", oauth_router_1.oauthRouter);
 app.use(error_middleware_1.errorHandler);
 app.use(not_found_middleware_1.notFoundHandler);
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Listening on port ${PORT}`);
+// });
+exports.default = app;

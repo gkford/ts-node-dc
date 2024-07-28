@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateAccessToken = void 0;
 const dotenv = __importStar(require("dotenv"));
 const express_oauth2_jwt_bearer_1 = require("express-oauth2-jwt-bearer");
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env.local' });
 exports.validateAccessToken = (0, express_oauth2_jwt_bearer_1.auth)({
     issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
     audience: process.env.AUTH0_AUDIENCE,

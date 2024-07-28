@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAdminMessage = exports.getProtectedMessage = exports.getPublicMessage = void 0;
 const getPublicMessage = () => {
     return {
-        text: "This is a public message. Also I like a public carrot",
+        text: "This is a public message. Codewords: public carrots",
     };
 };
 exports.getPublicMessage = getPublicMessage;
 const getProtectedMessage = () => {
     return {
-        text: "This is a protected message. Also, I love bananas",
+        text: "This is a protected message. Codewords: protected bananas",
     };
 };
 exports.getProtectedMessage = getProtectedMessage;

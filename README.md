@@ -6,6 +6,12 @@ monorepo for creating a GPT integrated single page app
 - single page frontend in react
 - auth0 for oauth
 
+### setup completion:
+For vercel cli to work, you might have to run:
+```
+echo 'export PATH="$PATH:$(yarn global bin)"' >> ~/.bashrc
+source ~/.bashrc
+```
 ### Frontend:
 Based roughly on this tutorial: 
 https://developer.auth0.com/resources/guides/spa/react/basic-authentication

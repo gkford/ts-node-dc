@@ -15,6 +15,7 @@ fi
 pip install aider-chat
 
 # Install project dependencies with Yarn
+yarn global add vercel
 yarn install
 
 echo "Post-create script has been executed."
